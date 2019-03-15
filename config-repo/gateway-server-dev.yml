@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: dev
+    include: common
+  cloud:
+    bus:
+      trace:
+        enabled: true
+      enabled: true
+  #对于rabbitMQ的支持
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
+swagger:
+  doc:
+    version: 1.0.0-ALPHA
+    title: 网关文档
+    description: swagger在线文档
+    name:
+      - demo-store
+      - demo-customer
+
+zuul:
+  routes:
+    demo-store:
+      path: /store/**
+      serviceId: DEMO-STORE
+      sensitiveHeaders: "*"
+    demo-customer:
+      path: /customer/**
+      serviceId: DEMO-CUSTOMER
+      sensitiveHeaders: "*"
+    oauth2-server:
+      path: /uaa/**
+      serviceId: OAUTH2-SERVER
+      sensitiveHeaders: "*"

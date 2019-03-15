@@ -1,0 +1,26 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: localhost:${server.port}
+logging:
+  level:
+    com.cs: debug
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://127.0.0.1:7500/users/current
+      preferTokenInfo: false
+    client:
+      clientId: client
+      client-secret: 123456
+      access-token-uri: http://127.0.0.1:7500/oauth/token
+      grant-type: client_credentials
+      scope: all
+#开启hystrix熔断机制
+feign:
+  hystrix:
+    enabled: true
