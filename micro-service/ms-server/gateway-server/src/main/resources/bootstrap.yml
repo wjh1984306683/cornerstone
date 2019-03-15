@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      profile: dev
+      name: gateway-server
+      label: master
+      discovery:
+        serviceId: remote-config-server
+      enabled: true
+      fail-fast: true

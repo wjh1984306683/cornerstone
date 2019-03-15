@@ -1,0 +1,39 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: remote-config-server
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          uri: https://gitee.com/okok250/cornerstone.git   # 配置git仓库的地址
+          #username: xxx                                           # git仓库的账号（私有库必填）
+          #password: xxx                                            # git仓库的密码（私有库必填）
+          search-paths: /config-repo
+          default-label: master
+    bus:
+      trace:
+        enabled: true
+  #对于rabbitMQ的支持
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: localhost:${server.port}
+logging:
+  level:
+    com.cs: debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

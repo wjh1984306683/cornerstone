@@ -1,0 +1,41 @@
+base:
+  security:
+    #    登录后返回内容的形式，json和重定向，json可以为返回的自定义内容
+    loginType: REDIRECT
+    permitUrls:
+      - /index
+    permitHtml:
+      - /login.html
+      - /home.html
+    permitStaticResource:
+      - /webjars/**
+      - /plugins/**
+      - /css/**
+      - /img/**
+      - /js/**
+      - /fonts/**
+      - /favicon.ico
+    rememberMe:
+      enable: false
+      firstStartUp: true
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    username: root
+    password: 123456
+    url: jdbc:log4jdbc:mysql://localhost:3306/conerstone?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    open-in-view: true
+logging:
+  level:
+    com.cs.base: debug
+    jdbc:
+      connection: off
+      audit: off
+      sqlonly: off
+      resultset: off
+      sqltiming: DEBUG
